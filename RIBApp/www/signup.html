@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/index.css">
+        <title>Signup</title>
+    </head>
+    <body ng-app="RIBApp" ng-controller="signupCtrl" style="height:100%" class="image">
+       <div class="container-fluid">
+      		 <div class=row style="margin-top:20%">
+ 			 <img src="img/logo.png" class="img">
+      		</div>
+       		<div class="card">
+				<div class="login-panel well" style="box-shadow: 0px 1px 3.92px 0.08px rgba(0, 0, 1, 0.24); margin-top:10%">
+					<h3 style="margin-top:0px;margin-bottom:20px">Signup</h3>
+				<form name="form" ng-submit="signup()" role="form">
+					<div class="form-group">
+						<div class="row">
+							<div class="col-xs-4">
+								 <label for="username" style="padding:5px">UserName</label>
+								 <i class="fa fa-user" aria-hidden="true"></i>
+							</div>
+							<div class="col-xs-8" style="padding-right:10px;padding-left:0px;">
+								<input type="text" name="username"  class="form-control" ng-model="username" required />
+       							 <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block warning">Username is required</span>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="row">
+							<div class="col-xs-4">
+								 <label for="email" style="padding:5px">Email &nbsp;</label>
+								  <i class="fa fa-envelope" aria-hidden="true"></i>
+							</div>
+							<div class="col-xs-8" style="padding-right:10px;padding-left:0px;">
+								<input type="text" name="email"  class="form-control" ng-model="email" required />
+       							 <span ng-show="form.email.$dirty && form.email.$error.required" class="help-block warning">Email is required</span>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="row">
+							<div class="col-xs-4">
+								<label for="enterPassword">Enter &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-key" aria-hidden="true"></i> Password</label>
+							</div>
+							<div class="col-xs-8" style="padding-right:10px;padding-left:0px;">
+								 <input type="password" name="enterPassword" class="form-control" ng-model="enterPassword" required />
+      							  <span ng-show="form.enterPassword.$dirty && form.enterPassword.$error.required" class="help-block warning">Enter Password is required</span>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="row">
+							<div class="col-xs-4">
+								<label for="reEnterPassword">Re-Enter &nbsp; <i class="fa fa-key" aria-hidden="true"></i> Password</label>
+							</div>
+							<div class="col-xs-8" style="padding-right:10px;padding-left:0px;">
+								 <input type="password" name="reEnterPassword" class="form-control" ng-model="reEnterPassword" required />
+     							   <span ng-show="form.reEnterPassword.$dirty && form.reEnterPassword.$error.required" class="help-block warning">Re-Enter Password is required</span>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-xs-9">
+							<h5>Already have account ? <a href="login.html" style="color:rgba( 19, 153, 113, 0.971 );font-size:1.2em">Login</a></h5>
+						</div>
+						<div class="col-xs-3">
+							<div class="form-actions">
+     						   <button type="submit" ng-disabled="form.$invalid || dataLoading" class="btn btn-info">Signup</button>
+							</div>
+						</div>
+					</div>
+				</form>
+				</div>
+     	  	</div>
+       </div>
+    </body>
+</html>
