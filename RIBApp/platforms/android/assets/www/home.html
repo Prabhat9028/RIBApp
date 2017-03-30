@@ -1,17 +1,62 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="RIBApp">
     <head>
+     <meta name="viewport" content="width=device-width, initial-scale=1">
+     <link 
+  href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css" 
+  rel="stylesheet"  type='text/css'>
+      <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <link rel="stylesheet" type="text/css" href="css/index.css">
-        <title>Login</title>
+        <title>Home</title>
     </head>
-    <body ng-app="RIBApp" ng-controller="homeCtrl" style="height:100%">
-       <h2>Sucessfull login</h2>
-      	 <div>
-      	 	<a href="login.html">Back</a>
-      	 </div>
-       
-    </body>
+    <style>
+		#user-icon{
+            display: block;    
+     }
+	.user-btn{
+    border-radius: 14px;
+	}
+	.open .dropdown-menu {
+        display: block !important;
+		right: 0;
+		left: auto;	
+		top: 130%;
+    }
+	</style>
+    <body ng-controller="homeCtrl" style="height:100%">
+ 		<nav class="navbar navbar-default navbar-fixed-top" ng-init="show = true">
+    		<div class="container-fluid" style="margin-top:6px">
+    			<div class="row">
+    				<div class="col-xs-3" >
+    					<button class="btn btn-info user-btn" type="button" data-ng-click="addVehicle()" style="paddding-left:0px;">ADD </button>
+    				</div>
+    				<div class="col-xs-5" style="margin-left:35px">
+    				 <img src="img/logo.png" style="height:45px;width:100%">
+    				</div>
+    					<div class="dropdown pull-right" id="user-icon" style="border-radius:20px;margin-right:5px;">
+               			 <button class="btn btn-danger dropdown-toggle user-btn" type="button" data-toggle="dropdown" style="border-radius:20px;">
+                  			  <span class="glyphicon glyphicon-user"></span>
+                   				 <ul class="dropdown-menu">
+                       			 <li><a><i class="fa fa-lock"></i> Change Password</a></li>
+                      			  <li role="separator" class="divider"></li>
+                      			  <li><a data-ng-click="logout()"><i class="fa fa-sign-out"></i> Logout
+                          	  <span class="sr-only">(current)</span></a></li>
+                   			 </ul>
+                		</button>
+          			  </div>
+    			</div>
+			</div>     
+		</nav>
+   <div class="container-fluid">
+    <div class="row" style="margin-top:15%;margin-left:5px">
+    <h5 style="text-align:center">No notification</h5>
+    	
+    </div>
+    </div>
+       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+     </body>
 </html>

@@ -27,3 +27,39 @@ app.controller("signupCtrl", function($scope){
 	}
 	
 });
+
+app.controller("homeCtrl",['$scope','RIBService', function($scope, RIBService){
+	$scope.addVehicle = function(){
+		
+		location = "addVehicle.html";
+	}
+	
+	$scope.logout = function(){
+		
+		location = "login.html"
+	}
+}]);
+
+app.controller('addVehicleCtrl',['$scope','RIBService', function($scope, RIBService){
+	
+	$scope.back = function(){
+		location = "home.html"
+	}
+	
+	$scope.add = function(){
+		alert('Vehicle Successfully Register');
+		location = "home.html";
+	}
+	
+	$scope.logout = function(){
+		
+		location = "login.html"
+	}
+	
+}]);
+
+app.service('RIBService',['$http',function($http){
+	
+	
+	
+}]);

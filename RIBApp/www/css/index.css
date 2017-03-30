@@ -10,7 +10,7 @@
 */
 
 .image{
-    position: relative;
+    position: absolute;;
     background-image: url(../img/pexels-photo-316466.jpeg);
     background-repeat: no-repeat;
     background-size: cover;

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html ng-app="RIBApp">
+    <head>
+     <meta name="viewport" content="width=device-width, initial-scale=1">
+     <link 
+  href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css" 
+  rel="stylesheet"  type='text/css'>
+      <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/index.css">
+        <title>Add Vehicle</title>
+    </head>
+    <style>
+	#user-icon{
+            display: block;    
+     }
+	.user-btn{
+    border-radius: 14px;
+	}
+	.open .dropdown-menu {
+        display: block !important;
+		right: 0;
+		left: auto;	
+		top: 130%;
+    }
+	
+	</style>
+    <body  ng-controller="addVehicleCtrl" style="height:100%">
+ 		<nav class="navbar navbar-default navbar-fixed-top" ng-init="show = true">
+    		<div class="container-fluid" style="margin-top:6px">
+    			<div class="row">
+    				<div class="col-xs-3" >
+    					<button class="btn btn-success user-btn" type="button" data-ng-click="back()" style="paddding-left:0px;">back </button>
+    				</div>
+    				<div class="col-xs-5" style="margin-left:30px">
+    				 <img src="img/logo.png" style="height:45px;width:100%">
+    				</div>
+    					<div class="dropdown pull-right" id="user-icon" style="border-radius:20px;margin-right:5px;">
+               			 <button class="btn btn-danger dropdown-toggle user-btn" type="button" data-toggle="dropdown" style="border-radius:20px;">
+                  			  <span class="glyphicon glyphicon-user"></span>
+                   				 <ul class="dropdown-menu">
+                       			 <li><a><i class="fa fa-lock"></i> Change Password</a></li>
+                      			  <li role="separator" class="divider"></li>
+                      			  <li><a data-ng-click="logout()"><i class="fa fa-sign-out"></i> Logout
+                          	  <span class="sr-only">(current)</span></a></li>
+                   			 </ul>
+                		</button>
+          			  </div>
+    			</div>
+			</div>     
+		</nav>
+    <div class="container-fluid" style="margin-top:100px;margin-left:20px;margin-right:20px">
+    <div class="row" style="margin-left:90px;padding-bottom:12px">
+    	<h4>Car Registration</h4>
+    </div>
+    <div class="card ">
+    <form name="form" ng-submit="add()" role="form">
+    	<div class="form-group">
+    	<div class="row">
+    		<div class="col-xs-4">
+				 <label for="car" required style="padding:3px">Car-Name&nbsp;</label>
+			</div>
+			<div class="col-xs-8" style="padding-right:10px;padding-left:0px;">
+				<input type="text" name="car"  class="form-control" ng-model="car" required />
+				   <span ng-show="form.car.$dirty && form.car.$error.required" class="help-block warning">Car-Name is required</span>
+			</div>
+    		</div>
+		</div>
+  		<div class="form-group">
+    	<div class="row">
+    		<div class="col-xs-4">
+				 <label for="carName" required style="padding:3px">Car-Model&nbsp;</label>
+			</div>
+			<div class="col-xs-8" style="padding-right:10px;padding-left:0px;">
+				<input type="text" name="carName"  class="form-control" ng-model="carName" required />
+				   <span ng-show="form.carName.$dirty && form.carName.$error.required" class="help-block warning">Car-model is required</span>
+			</div>
+    		</div>
+		</div>
+   		<div class="form-group">
+    		<div class="row">
+    		<div class="col-xs-4">
+				 <label for="id" style="padding:3px">RaspberryPi-Unique ID&nbsp;</label>
+			</div>
+			<div class="col-xs-8" style="padding-right:10px;padding-left:0px;">
+				<input type="text" name="id"  class="form-control" ng-model="id" required />
+				   <span ng-show="form.id.$dirty && form.id.$error.required" class="help-block warning">Raspberry-id is required</span>
+			</div>
+    		</div>
+    	</div>
+    	<div class="row">
+			<div class="col-xs-12 pull-right" style="">
+				<div class="form-actions">
+				  <button type="submit" ng-disabled="form.$invalid || dataLoading" class="btn btn-info" style="width:20%; margin-left:80%">Add</button>
+				 </div>
+			</div>
+		</div>
+    </form>	
+    </div>
+    </div>
+       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+     </body>
+</html>
