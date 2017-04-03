@@ -29,13 +29,18 @@ app.controller("signupCtrl", function($scope){
 });
 
 app.controller("homeCtrl",['$scope','RIBService', function($scope, RIBService){
+	
+	document.addEventListener("backbutton", onBackKeyDown, false);
+
+	function onBackKeyDown(e) {
+	   e.preventDefault();
+	   alert('Back Button is Pressed!');
+	}
 	$scope.addVehicle = function(){
-		
 		location = "addVehicle.html";
 	}
 	
 	$scope.logout = function(){
-		
 		location = "login.html"
 	}
 }]);

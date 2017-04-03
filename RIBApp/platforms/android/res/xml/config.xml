@@ -4,6 +4,9 @@
         <param name="android-package" value="org.apache.cordova.whitelist.WhitelistPlugin" />
         <param name="onload" value="true" />
     </feature>
+    <feature name="Notification">
+        <param name="android-package" value="org.apache.cordova.dialogs.Notification" />
+    </feature>
     <name>RIBApp</name>
     <description>
        Remote Ignition Blocking App
@@ -22,4 +25,16 @@
     <icon src="logo.png" />
     <allow-intent href="market:*" />
     <preference name="loglevel" value="DEBUG" />
+    <feature name="PushPlugin">
+        <param name="android-package" value="com.plugin.gcm.PushPlugin" />
+    </feature>
+    <feature name="NativeStorage">
+        <param name="android-package" value="NativeStorage" />
+    </feature>
+    <feature name="Toast">
+        <param name="android-package" value="nl.xservices.plugins.Toast" />
+    </feature>
+    <feature name="ProgressIndicator">
+        <param name="android-package" value="org.apache.cordova.progressindicator.ProgressIndicator" />
+    </feature>
 </widget>
