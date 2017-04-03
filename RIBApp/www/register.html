@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="index">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular.min.js"></script>
+    <!-- Angular Components -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular-cookies.js"></script>
+    <script src="js/main.js"></script>
+    <link rel="stylesheet" href="css/main.css">
+    <title>Title - Register</title>
+</head>
+<body ng-controller="registerUser">
+<div class="container">
+    <div class="row" style="margin-top:60px">
+            <h1 class="logo">CarSecure</h1>
+                </div>
+           <div class="login-form">
+          <div class="row" style="margin-top:40px">
+            <form  data-ng-submit="reguser()">
+                <div class="form-group">
+                    <input type="text" name="name" ng-model="carsecure.user.name" class="form-control" placeholder="Your Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="email" ng-model="carsecure.user.email" class="form-control" placeholder="Email" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" name="password1" ng-model="carsecure.user.password1" class="form-control" placeholder="Password" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" name="password2" ng-model="carsecure.user.password2" class="form-control" placeholder="Retype Password" required>
+                </div>
+                <div class="form-group"><input type="submit" class="form-control btn btn-primary" value="Register"></div>
+            </form>
+		</div>
+        </div>
+        <div class="redirect">
+            <span>Already have an account?&nbsp;&nbsp;&nbsp;Login&nbsp;&nbsp;&nbsp;<a href="index.html">here</a> </span>
+        </div>
+        <div class="creators">
+            Created by Prajyot Walali, Prabhat Singh and Ranvijay Prajapati.
+        </div>
+ 
+</div>
+</body>
+</html>

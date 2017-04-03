@@ -1,69 +1,56 @@
-var app = angular.module("RIBApp", []);
+var app = angular.module("index",["ngCookies"]);
 
-app.controller("loginCtrl", function($scope) {
-    $scope.login = function(){
-		if($scope.email == 'prabhatosingh80@gmail.com' && $scope.password == 'hello'){
-		    location="home.html"
-		   }
-		else{
-			alert("email or password incorrect");
-		}
-	}
-	
-});
-
-app.controller("signupCtrl", function($scope){
-	
-	$scope.signup = function(){
-		
-		if($scope.enterPassword == $scope.reEnterPassword){
-			
-			location = "login.html"
-			alert("Successfull Signup");
-		}
-		else{
-			alert("Password does not match");
-		}
-	}
-	
-});
-
-app.controller("homeCtrl",['$scope','RIBService', function($scope, RIBService){
-	
-	document.addEventListener("backbutton", onBackKeyDown, false);
-
-	function onBackKeyDown(e) {
-	   e.preventDefault();
-	   alert('Back Button is Pressed!');
-	}
-	$scope.addVehicle = function(){
-		location = "addVehicle.html";
-	}
-	
-	$scope.logout = function(){
-		location = "login.html"
-	}
+app.controller("MainCtrl", ["$scope", "$cookies", "$http", function($scope, $cookies, $http){
+    $scope.notLoggedIn = false;
+    if($cookies.get("username") == undefined && $cookies.get("username") != "" && $cookies.get("key") == undefined && $cookies.get("key") != "" )
+     {
+         $scope.notLoggedIn = true;
+     }else{
+        $http.get("/checkcreds").then(function(resp){
+            if(resp.data["status"] == "success"){
+                window.location="home.html";
+            }else{
+                $scope.notLoggedIn = true;
+            }
+        });
+     }
 }]);
 
-app.controller('addVehicleCtrl',['$scope','RIBService', function($scope, RIBService){
-	
-	$scope.back = function(){
-		location = "home.html"
-	}
-	
-	$scope.add = function(){
-		alert('Vehicle Successfully Register');
-		location = "home.html";
-	}
-	
-	$scope.logout = function(){
-		
-		location = "login.html"
+
+app.controller("register",["$scope", "Service", function($scope,Service){
+	Service.setCarsecure($scope); 
+  	$scope.carsecure = {};	
+	$scope.reguser = function(){
+		var carsecure = angular.copy($scope.carsecure);
+		console.log($scope.carsecure);
+		Service.registeruser(carsecure).then(function(resp){
+			var status = resp.status;
+			console.log(status);
+			window.location = "registervehicle.html";
+		})
 	}
 	
 }]);
 
-app.service('RIBService',['$http',function($http){
+app.service("Service",["$http", function($http){
+	this.carsecure  = "";
+	
+	this.setCarsecure = function(scope){
+        this.carsecure = scope;
+    }
+
+    this.getCarsecure = function(){
+      return this.carsecure;
+    }
+	
+	this.registeruser = function(data){
+		debugger;
+        return $http({
+            method: 'POST',
+            url: "http://carsecure.herokuapp.com/reguser",
+            data: data
+        });
+    };
 	
 	
 	

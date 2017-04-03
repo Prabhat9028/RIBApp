@@ -1,0 +1,49 @@
+*{margin:0;padding:0;}
+
+body{
+    /*background: url(http://www.planwallpaper.com/static/images/recycled_texture_background.jpg);*/
+    /*background-color: #444;*/
+    /*background: url(http://www.planwallpaper.com/static/images/recycled_texture_background.jpg),url(http://www.planwallpaper.com/static/images/maxresdefault.jpg),url(http://www.planwallpaper.com/static/images/518169-backgrounds.jpg);*/
+    font-family: 'Lato', sans-serif;
+}
+
+.login-form{
+    width:35vw;
+    height: 85vh;
+    margin: auto;
+    display: flex;
+    padding: 1em;
+}
+
+.logo{
+    text-align: center;
+}
+
+.login-form > *{
+    margin: auto auto;
+    flex: 1;
+}
+
+.login-form > form {
+/*    border-left: 1px solid #444;*/
+/*    padding: 2em 0em 2em 3em;*/
+}
+
+.redirect{
+    text-align: center;
+}
+
+.redirect > span > a:link, .redirect>span>a:visited, .redirect>span>a:hover{
+    color: #52c0f3;
+}
+
+.redirect>span>a:active{
+    color: #367396;
+}
+
+@media (max-width: 1200px) {
+    .login-form{
+        width: 75vw;
+    }
+}
+
