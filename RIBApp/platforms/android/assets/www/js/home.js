@@ -1,6 +1,3 @@
-/**
- * Created by prajyot on 30/3/17.
- */
 
 var app = angular.module('home',['ngCookies']);
 
@@ -30,7 +27,7 @@ app.controller("MainCtrl", ["$scope", "$cookies", "$cookieStore", "MainService",
     }
 
     $scope.logout = function(){
-        window.location = '/logout';
+        window.location = 'index.html';
     }
 }]);
 
@@ -39,7 +36,7 @@ app.service("MainService",["$http", function($http){
     this.getvehicle = function(){
         return $http({
             method: "GET",
-            url: "/api/getvehicle"
+            url: "http://carsecure.herokuapp.com/api/getvehicle"
         });
     };
 

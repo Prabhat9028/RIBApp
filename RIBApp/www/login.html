@@ -1,67 +1,28 @@
-<!DOCTYPE html>
-<html ng-app="RIBApp">
-    <head>
-     <meta name="viewport" content="width=device-width, initial-scale=1">
-     <link 
-  href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css" 
-  rel="stylesheet"  type='text/css'>
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
-        <link rel="stylesheet" type="text/css" href="css/index.css">
-        <title>Login</title>
-    </head>
-    <body  ng-controller="loginCtrl" style="height:100%" class="image">
-       <div class="container-fluid">
-       <div class=row style="margin-top:20%">
- 			 <img src="img/logo.png" class="img">
-      		</div>
-       		   <div class="card">
-				<div class="login-panel well" id="triangle" style="box-shadow: 0px 1px 3.92px 0.08px rgba(0, 0, 1, 0.24); margin-top:10%">
-				<h3 style="margin-top:0px;margin-bottom:20px">Login</h3>
-				<form name="form" ng-submit="login()" role="form">
-					<div class="form-group">
-						<div class="row">
-							<div class="col-xs-4">
-								 <label for="email" style="padding:3px">Email</label>
-<!--								 <i class="fa fa-envelope" aria-hidden="true"></i>-->
-							</div>
-							<div class="col-xs-8" style="padding-right:10px;padding-left:0px;">
-								<input type="text" name="email"  class="form-control" ng-model="email" required />
-     							   <span ng-show="form.email.$dirty && form.email.$error.required" class="help-block warning">Email is required</span>
-							</div>
-						</div>
-					</div>
-					<div class="form-group">
-						<div class="row">
-							<div class="col-xs-4">
-								<label for="password" style="padding:2px;">Password</label>
-<!--								<i class="fa fa-key" aria-hidden="true"></i>-->
-							</div>
-							<div class="col-xs-8" style="padding-right:10px;padding-left:0px;">
-								 <input type="password" name="password" id="password" class="form-control" ng-model="password" required />
-       							 <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block warning">Password is required</span>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-xs-12" style="padding-right:10px;">
-							<div class="form-actions">
-      						  <button type="submit" ng-disabled="form.$invalid || dataLoading" class="btn btn-info" style="width:100%">Login</button>
-   							 </div>
-						</div>
-					</div>
-						<div class="row">
-						<div class="col-xs-9" style="margin-left:50px;float:center">
-							<h5>Don't have account ? <a href="signup.html" style="color:rgba( 19, 153, 113, 0.971 );font-size:1.2em;">Signup</a></h5>
-						</div>
-						</div>
-				
-				</form>
+<div>
+<div class="container">
+		   <div class="row" style="margin-top:60px">
+		   <div class="col-xs-12">
+			<h1 class="logo">CarSecure</h1>
+			</div>
+			</div>
+		 <div class="login-form">
+			<div class="row" style="margin-top:40px">
+			<form data-ng-submit="login()">
+				<div class="form-group">
+					<input type="text" name="username" ng-model="carsecure.login.username" class="form-control" placeholder="Email" required>
 				</div>
-     	  	</div>
-		   </div>
-    </body>
-</html>
+				<div class="form-group">
+					<input type="password" name="password" ng-model="carsecure.login.password" class="form-control" placeholder="Password" required>
+				</div>
+				<div class="form-group"><input type="submit" class="form-control btn btn-primary" value="Login"></div>
+			</form>
+			</div>
+		</div>
+		<div class="redirect">
+			<span>Do not have an account?&nbsp;&nbsp;&nbsp;Register&nbsp;&nbsp;&nbsp;<a ng-click="signup()">here</a> </span>
+		</div>
+		<div class="creators">
+			Created by Prajyot Walali, Prabhat Singh and Ranvijay Prajapati.
+		</div>
+	</div>
+</div>

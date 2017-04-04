@@ -16,22 +16,23 @@
     <title>Home Page</title>
 </head>
 <body ng-controller="MainCtrl">
-<div ng-if="loggedIn">
+<div>
     <div class="container-fluid">
         <div class="row header-row">
             <div class="col-sm-12 col-md-12 col-xs-12">
                 <div class="flex-wrap header-wrap">
-                    <div class=""><span class="glyphicon glyphicon-menu-hamburger"></span></div>
+                    <div class=""><button class="btn btn-info" style="margin-top:10px"><span class="glyphicon glyphicon-menu-hamburger"></span></button></div>
                     <div class="">CarSecure</div>
-                    <div class="" ng-click="logout()">
+                    <div class="" ><button class="btn btn-danger" style="margin-top:10px" ng-click="logout()">
                         <span class="glyphicon glyphicon-log-out" alt="logout"></span>
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <div class="container">
-        <div class="row" ng-if="vehicleInfo['status'] == 'success'">
+        <div class="row" >
             <div class="col-sm-12 col-md-12 col-xs-12">
                 <div class="card">
                     <div class="card-header">
@@ -64,3 +65,10 @@
 </div>
 </body>
 </html>
+
+
+
+
+
+
+ng-if="vehicleInfo['status'] == 'success'"

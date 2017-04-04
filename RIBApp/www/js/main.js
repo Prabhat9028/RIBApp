@@ -1,6 +1,10 @@
-var app = angular.module("index",["ngCookies"]);
 
-app.controller("MainCtrl", ["$scope","Service", "$cookies", "$http", function($scope, Service ,$cookies, $http){
+app.controller('ContainerCtrl', ['$scope', '$state', 'Service', function($scope, $state, Service){
+	debugger;
+	$state.go('login');
+}]);
+
+app.controller("loginCtrl", ["$scope", '$state', "Service", "$cookies", "$http", function($scope, $state, Service ,$cookies, $http){
 //    $scope.notLoggedIn = false;
 //    if($cookies.get("username") == undefined && $cookies.get("username") != "" && $cookies.get("key") == undefined && $cookies.get("key") != "" )
 //     {
@@ -15,29 +19,36 @@ app.controller("MainCtrl", ["$scope","Service", "$cookies", "$http", function($s
 //        });
 //     }
 	
-	$scope.login = function(){
-		var log = angular.copy($scope.carsecure.login);
-		Service.login(log).then(function(resp){
-			console.log(resp.status);
-			console.log(resp.data);
-			console.log($cookies.get("username"));
-			console.log($cookies.get("key"));
-			debugger;
-			if(resp.status == 200){
-			   window.location = "home.html"
-			   }
-			else{
-				alert("wrong email or password");
-			}
-		})
+	$scope.signup = function(){
+		$state.go('signup');
 	}
+	
+	
+	
+//	$scope.login = function(){
+//		var log = angular.copy($scope.carsecure.login);
+//		Service.login(log).then(function(resp){
+//			console.log(resp.status);
+//			console.log(resp.data);
+//			console.log($cookies.get("username"));
+//			console.log($cookies.get("key"));
+//			debugger;
+//			if(resp.status == 200){
+//			   window.location = "home.html"
+//			   }
+//			else{
+//				alert("wrong email or password");
+//			}
+//		})
+//	}
 	
 	
 }]);
 
 
-app.controller("registerUser",["$scope", "Service", function($scope, Service){
+app.controller("registerUser",["$scope", '$state', "Service", function($scope, $state, Service){
 	Service.setCarsecure($scope); 
+	var email = "";
 	$scope.carsecure = {};
 	$scope.carsecure.login = {};
   	$scope.carsecure.user = {};
@@ -46,46 +57,43 @@ app.controller("registerUser",["$scope", "Service", function($scope, Service){
 		var user = angular.copy($scope.carsecure.user);
 		console.log($scope.carsecure);
 		Service.registeruser(user).then(function(resp){
-			console.log(resp.data.email);
-			Service.setEmail(resp.data.email);
-//			$rootScope.email = resp.data.email;
+			var email = resp.data.email;
+			Service.setEmail(email);
 			debugger;
-			console.log(status); 
-			window.location = "registervehicle.html";
+			$state.go('registervehicle');
 		});
 	};
 }]);
 
-app.controller("registerVehicle", ["$scope", "Service", function($scope, Service){
+app.controller("registerVehicle", ["$scope", '$state', "Service", function($scope, $state, Service){
 	Service.getCarsecure();
-	console.log($scope.carsecure);
 	$scope.carsecure = {};
 	$scope.carsecure.regvehicle = {};
-	$scope.carsecure.regvehicle.email = "";
-//	$scope.carsecure.regvehicle = {};
-//	$scope.carsecure.regvehicle.email = Service.getEmail();
 	$scope.carsecure.regvehicle.email = Service.getEmail();
 	debugger;
 	$scope.regvehicle = function(){
-	var vehicle = angular.copy($scope.carsecure.regvehicle);
-	Service.registervehicle(vehicle).then(function(resp){
-	console.log("resp.status");
-	console.log($scope.carsecure.regvehicle);
-		window.location = "index.html";
-	});
+		var vehicle = angular.copy($scope.carsecure.regvehicle);
+		debugger;
+		Service.registervehicle(vehicle).then(function(resp){
+		console.log(resp.status);
+		console.log($scope.carsecure.regvehicle);
+			$state.go('login');
+		});
 	};
 }]);
 
 app.service("Service",["$http", function($http){
 	this.carsecure  = "";
-	this.email = undefined;
-	
+	this.respEmail = "";
+
 	this.setEmail = function(email){
-		this.email = email;
+		this.respEmail = email;	
+		debugger;
 	}
 	
 	this.getEmail = function(){
-		return this.email;
+		return this.respEmail;
+		debugger;
 	}
 	
 	this.setCarsecure = function(scope){
@@ -96,8 +104,6 @@ app.service("Service",["$http", function($http){
       return this.carsecure;
     }
 	
-	
-	
 	this.login = function(data){
         return $http({
             method: 'POST',
@@ -105,8 +111,6 @@ app.service("Service",["$http", function($http){
             data: data
         });
     };
-	
-	
 	
 	this.registeruser = function(data){
 		debugger;

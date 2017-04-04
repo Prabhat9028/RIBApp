@@ -10,11 +10,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular.min.js"></script>
     <!-- Angular Components -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular-cookies.js"></script>
-    <script src="js/index.js"></script>
+    <script src="js/main.js"></script>
     <link rel="stylesheet" href="css/main.css">
     <title>Title - Register</title>
 </head>
-<body ng-controller="register">
+<body ng-controller="registerUser">
 <div class="container">
     <div class="row" style="margin-top:60px">
             <h1 class="logo">CarSecure</h1>
@@ -23,16 +23,16 @@
           <div class="row" style="margin-top:40px">
             <form  data-ng-submit="reguser()">
                 <div class="form-group">
-                    <input type="text" name="name" ng-model="carsecure.name" class="form-control" placeholder="Your Name" required>
+                    <input type="text" name="name" ng-model="carsecure.user.name" class="form-control" placeholder="Your Name" required>
                 </div>
                 <div class="form-group">
-                    <input type="text" name="email" ng-model="carsecure.email" class="form-control" placeholder="Email" required>
+                    <input type="text" name="email" ng-model="carsecure.user.email" class="form-control" placeholder="Email" required>
                 </div>
                 <div class="form-group">
-                    <input type="password" name="password1" ng-model="carsecure.password1" class="form-control" placeholder="Password" required>
+                    <input type="password" name="password1" ng-model="carsecure.user.password1" class="form-control" placeholder="Password" required>
                 </div>
                 <div class="form-group">
-                    <input type="password" name="password2" ng-model="carsecure.password2" class="form-control" placeholder="Retype Password" required>
+                    <input type="password" name="password2" ng-model="carsecure.user.password2" class="form-control" placeholder="Retype Password" required>
                 </div>
                 <div class="form-group"><input type="submit" class="form-control btn btn-primary" value="Register"></div>
             </form>

@@ -10,7 +10,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular.min.js"></script>
     <!-- Angular Components -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular-cookies.js"></script>
-    <script src="js/index.js"></script>
+    <script src="js/main.js"></script>
     <link rel="stylesheet" href="css/main.css">
     <title>Title - Login</title>
 </head>
@@ -24,12 +24,12 @@
                     </div>
                  <div class="login-form">
                     <div class="row" style="margin-top:40px">
-                    <form action="login()" method="post">
+                    <form data-ng-submit="login()">
                         <div class="form-group">
-                            <input type="text" name="username" ng-model="email" class="form-control" placeholder="Email" required>
+                            <input type="text" name="username" ng-model="carsecure.login.username" class="form-control" placeholder="Email" required>
                         </div>
                         <div class="form-group">
-                            <input type="password" name="password" ng-model="password" class="form-control" placeholder="Password" required>
+                            <input type="password" name="password" ng-model="carsecure.login.password" class="form-control" placeholder="Password" required>
                         </div>
                         <div class="form-group"><input type="submit" class="form-control btn btn-primary" value="Login"></div>
                     </form>
