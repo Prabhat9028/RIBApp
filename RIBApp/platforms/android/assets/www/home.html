@@ -1,9 +1,9 @@
 <style>
 #info-sidebar{
 	position: absolute;
-	left: -30vw;
+	left: -80vw;
 	top:0;
-	height: 200vh;
+	height: 110vh;
 	width: 0vw;
 	z-index: 1000000;
 	margin: 0;
@@ -24,10 +24,10 @@
         <div class="row header-row">
             <div class="col-sm-12 col-md-12 col-xs-12">
                 <div class="flex-wrap header-wrap">
-                    <div class=""><button class="btn btn-info" style="margin-top:10px" id="info"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
+                    <div class=""><button class="btn btn-sm btn-info" style="margin-top:10px" id="info"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
                     </div>
                     <div class="">CarSecure</div>
-                    <div class="" ><button class="btn btn-danger" style="margin-top:10px" ng-click="logout()">
+                    <div class="" ><button class="btn btn-sm btn-danger" style="margin-top:10px" ng-click="logout()">
                         <span class="glyphicon glyphicon-log-out" alt="logout"></span>
                         </button>
                     </div>
@@ -40,18 +40,20 @@
 							id="sidebar-slide-in" ng-click="slideIn()">
 							  <span id="info-sidebar-slideIn"
 								  class="glyphicon glyphicon-arrow-left"
-								  style="font-size: 22px; position: relative;"></span>
+								  style="font-size: 20px; position: relative;"></span>
 			</div>
-<!--
+			<div>
+				
+			</div>
 								<div>
 								<div class="row header" style="margin-left:2px;padding:2px;width:95%;border-bottom:1px solid grey">
 									<h4>Profile</h4>
 								</div>
 								<div class="well" style="margin-left:2px;padding:2px;width:95%;">
-									<h5>UserName:</h5>
+									<h5>UserName:&nbsp&nbsp{{credential.name}}</h5>
 								</div>
 								<div class="well" style="margin-left:2px;padding:2px;width:95%;">
-									<h5>Email:</h5>
+									<h5>Email:&nbsp&nbsp{{credential.username}}</h5>
 								</div>
 								</div>
 								<div>
@@ -59,15 +61,14 @@
 									<h4>Vehicle Information</h4>
 								</div>
 								<div class="well" style="margin-left:2px;padding:2px;width:95%;">
-									<h5>Car:</h5>
+									<h5>Car:&nbsp&nbsp {{carName}}</h5>
 								</div>
 								<div class="well" style="margin-left:2px;padding:2px;width:95%;">
-									<h5>Device Id:</h5>
+									<h5>Description:&nbsp&nbsp {{carDesp}}</h5>
 								</div>
 								</div>
--->
 								
-							</div>
+	</div>
     <div class="container">
         <div class="row" >
             <div class="col-sm-12 col-md-12 col-xs-12">
@@ -92,8 +93,34 @@
         </div>
         <!--Content Body-->
         <div class="row content-body">
-            <div class="no-data-content">
+            <div class="no-data-content" ng-if="notificationData == undefined">
                 <span class="glyphicon glyphicon-floppy-remove"></span>
+            </div>
+            <div class="col-sm-12 col-md-12 col-xs-12" ng-if="notificationData!=undefined">
+<!--
+                <div class="card">
+                    <div class="card-body scrollable-data">
+-->
+                        <div class="card" data-ng-repeat="notification in notificationData track by $index">
+                            <div class="card-header">{{notification.timestamp}}</div>
+                            <div class="card-body">
+                                <div class="card-list">
+                                    <div class="card-label">Status</div>
+                                    <div class="card-label-data">{{notification.status}}</div>
+                                </div>
+                                <div class="card-list">
+                                    <div class="card-label">User Action</div>
+                                    <div class="card-label-data" ng-if="notification.status == 'WAITING'">
+                                    <button class="btn-xs btn-success" ng-click="userAction('ALLOW',notification.id)">Allow</button>
+                                    <button class="btn-xs btn-danger" style="margin-left:11px;" ng-click="userAction('BLOCK',notification.id)">Block</button></div>
+                                    <div class="card-label-data" ng-if="notification.status != 'WAITING'">{{notification.useraction}}</div>
+                                </div>
+                            </div>
+                        </div>
+<!--
+                    </div>
+                </div>
+-->
             </div>
         </div>
         <!--Footer-->

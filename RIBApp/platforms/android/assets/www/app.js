@@ -1,4 +1,4 @@
-var app = angular.module("index", ['ui.router','ngCookies','angular-loading-bar']);
+var app = angular.module("index", ['ui.router','ngCookies','angular-loading-bar', 'ngAnimate', 'toastr']);
 
 app.config(function($stateProvider, $urlRouterProvider){
 	
@@ -39,3 +39,5 @@ app.config(function($stateProvider, $urlRouterProvider){
 	$urlRouterProvider.otherwise('login');
 	
 });
+
+app.constant('serverUrl', 'http://192.168.0.22:2121');

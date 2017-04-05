@@ -62,6 +62,14 @@ module.exports = [
         "clobbers": [
             "ProgressIndicator"
         ]
+    },
+    {
+        "id": "cordova-sqlite-storage.SQLitePlugin",
+        "file": "plugins/cordova-sqlite-storage/www/SQLitePlugin.js",
+        "pluginId": "cordova-sqlite-storage",
+        "clobbers": [
+            "SQLitePlugin"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -72,7 +80,8 @@ module.exports.metadata =
     "com.phonegap.plugins.PushPlugin": "2.5.0",
     "cordova-plugin-nativestorage": "2.2.2",
     "cordova-plugin-x-toast": "2.6.0",
-    "org.pbernasconi.progressindicator": "1.1.0"
+    "org.pbernasconi.progressindicator": "1.1.0",
+    "cordova-sqlite-storage": "2.0.2"
 };
 // BOTTOM OF METADATA
 });

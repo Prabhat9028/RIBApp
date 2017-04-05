@@ -17,7 +17,7 @@
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
     <platform name="android">
-       <icon src="logo.png" />
+        <icon src="logo.png" />
         <allow-intent href="market:*" />
     </platform>
     <platform name="ios">
@@ -25,4 +25,5 @@
         <allow-intent href="itms-apps:*" />
     </platform>
     <engine name="android" spec="~6.1.2" />
+    <plugin name="cordova-sqlite-storage" spec="~2.0.2" />
 </widget>

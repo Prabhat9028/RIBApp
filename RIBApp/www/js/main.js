@@ -1,5 +1,8 @@
 
 app.controller('ContainerCtrl', ['$scope', '$state', 'Service', function($scope, $state, Service){
+	debugger;
+	var user = window.localStorage.getItem('username');
+	var key = window.localStorage.getItem('key');
 	$state.go('login');
 }]);
 
@@ -29,12 +32,15 @@ app.controller("loginCtrl", ["$scope", '$state', "Service", "$cookies", "$http",
 			console.log(resp.data);
 			$scope.cred.username = resp.data.username;
 			$scope.cred.key = resp.data.key;
+			window.localStorage.setItem('username', resp.data.username);
+			window.localStorage.setItem('key', resp.data.key);
+			$scope.cred.name = resp.data.displayname
 			Service.setCred($scope.cred);
 			console.log($cookies.get("username"));
 			console.log($cookies.get("key"));
 			debugger;
 			if(resp.data.status == "success"){
-//			   $state.go('home');
+			   $state.go('home');
 			   }
 			else{
 				alert("wrong email or password");
@@ -74,7 +80,6 @@ app.controller("registerVehicle", ["$scope", '$state', "Service", function($scop
 	debugger;
 	$scope.regvehicle = function(){
 		var vehicle = angular.copy($scope.carsecure.regvehicle);
-		debugger;
 		Service.registervehicle(vehicle).then(function(resp){
 		console.log(resp.status);
 		console.log($scope.carsecure.regvehicle);
@@ -84,29 +89,57 @@ app.controller("registerVehicle", ["$scope", '$state', "Service", function($scop
 }]);
 
 
-app.controller("homeCtrl", ["$scope", '$state', "Service", function($scope, $state, Service){
-
-	var credential = Service.getCred();
-	console.log(credential);
-	debugger;
-	Service.getvehicle(credential).then(function(resp){
+app.controller("homeCtrl", ["$scope", '$state', "Service", 'toastr','$timeout', function($scope, $state, Service, toastr, $timeout){
+	
+	$scope.credential = {};
+	$scope.credential = Service.getCred();
+	var cred = $scope.credential;
+	console.log(cred);
+	Service.getvehicle(cred).then(function(resp){
 		console.log(resp.data);
+		$scope.carName = resp.data.name;
+		$scope.carDesp = resp.data.description;
+		
+	});
+	
+	Service.getNotifications(cred).then(function(resp){
+		console.log(resp.data);
+		$scope.notificationData = resp.data.data;
 	});
 	
 	$scope.slideIn = function() {
         document.getElementById('info-sidebar').style.width = '0vw';
-        document.getElementById('info-sidebar').style.left = '-20vw';
+        document.getElementById('info-sidebar').style.left = '-80vw';
     }
 	
 	$scope.logout = function(){
-		Service.logout(credential).then(function(resp){
+		debugger;
+		Service.logout(cred).then(function(resp){
 		$state.go("login");
 		});
 	}
 	
+	$scope.userAction = function(option, id){
+		$scope.credential.useraction = option;
+		$scope.credential.notificationId = id;
+		var data = $scope.credential;
+		debugger;
+		Service.userAction(data).then(function(resp){
+			console.log(resp.data);
+			if(resp.data.status == 'success'){
+			   $timeout(function(){
+				   Service.getNotifications(cred).then(function(resp){
+					$scope.notificationData = resp.data.data;
+				});}, 4500);
+				toastr.success(option.toLowerCase() + ' successfully');
+			   }
+		})
+	}
+	
+	
 }]);
 
-app.service("Service",["$http", function($http){
+app.service("Service",["$http", 'serverUrl', function($http, serverUrl){
 	this.carsecure  = "";
 	this.respEmail = "";
 	this.cred = "";
@@ -141,7 +174,7 @@ app.service("Service",["$http", function($http){
 	this.logout  = function(data){
 		return $http({
             method: 'POST',
-            url: "http://carsecure.herokuapp.com/api/logout",
+            url: serverUrl + "/api/logout",
             data: data
         });
 	}
@@ -149,7 +182,7 @@ app.service("Service",["$http", function($http){
 	this.login = function(data){
         return $http({
             method: 'POST',
-            url: "http://carsecure.herokuapp.com/api/login",
+            url: serverUrl + "/api/login",
             data: data
         });
     };
@@ -158,7 +191,7 @@ app.service("Service",["$http", function($http){
 		debugger;
         return $http({
             method: 'POST',
-            url: "http://carsecure.herokuapp.com/api/reguser",
+            url: serverUrl + "/api/reguser",
             data: data
         });
     };
@@ -167,7 +200,7 @@ app.service("Service",["$http", function($http){
 		debugger;
         return $http({
             method: 'POST',
-            url: "http://carsecure.herokuapp.com/api/regvehicle",
+            url: serverUrl + "/api/regvehicle",
             data: data
         });
     }
@@ -175,9 +208,27 @@ app.service("Service",["$http", function($http){
 	this.getvehicle = function(credential){
         return $http({
             method: "POST",
-            url: "http://carsecure.herokuapp.com/api/getvehicle",
+            url: serverUrl + "/api/getvehicle",
 			data: credential
         });
     };
+	
+	this.getNotifications = function(credential){
+		 return $http({
+            method: "POST",
+            url: serverUrl + "/api/getallnotifications",
+			data: credential
+        });
+	}
+	
+	this.userAction = function(credential){
+		 return $http({
+            method: "POST",
+            url: serverUrl + "/api/useraction",
+			data: credential
+        });
+	}
+	
+	
 	
 }]);

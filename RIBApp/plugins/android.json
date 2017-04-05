@@ -24,6 +24,9 @@
         },
         "org.pbernasconi.progressindicator": {
             "PACKAGE_NAME": "com.remoteIgnitionBlocking.RIBApp"
+        },
+        "cordova-sqlite-storage": {
+            "PACKAGE_NAME": "com.remoteIgnitionBlocking.RIBApp"
         }
     },
     "dependent_plugins": {}
