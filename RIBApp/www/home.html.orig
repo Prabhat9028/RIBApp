@@ -19,7 +19,17 @@
 #info-sidebar-slideIn{
 	left: 85%;
 }
+<<<<<<< HEAD
 
+=======
+/*
+.head{
+	background-color: #ebefeb;
+}
+*/
+
+table, td{padding: 0em 1em;}
+>>>>>>> 41c6fc8d1e32062593aa1535d3459dac6e6eb8ac
 .button,.button:hover{
 	background-color: transparent;
 	border: none;
