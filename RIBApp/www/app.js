@@ -1,4 +1,4 @@
-var app = angular.module("index", ['ui.router','ngCookies','angular-loading-bar', 'ngAnimate', 'toastr']);
+var app = angular.module("index", ['ui.router','ngCookies','angular-loading-bar', 'ngAnimate', 'toastr', 'ngCordova']);
 
 app.config(function($stateProvider, $urlRouterProvider){
 	
@@ -36,7 +36,7 @@ app.config(function($stateProvider, $urlRouterProvider){
 		
 	});
 	
-	$urlRouterProvider.otherwise('login');
+	$urlRouterProvider.otherwise('');
 	
 });
 

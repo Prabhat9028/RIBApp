@@ -14,8 +14,9 @@ body{background-color: #ffffff;}
 
 .header-row{
     /*background-color: #eeeeee;*/
+	background-color: #0b5b73;
     border-bottom: 2px solid #dddddd;
-    color: dimgray;
+    color: white;
 }
 
 .flex-wrap{
@@ -90,7 +91,7 @@ body{background-color: #ffffff;}
 }
 
 .card-header{
-    background-color: #eee;
+    background-color: #cedadd;
     font-size: 12px;
 }
 

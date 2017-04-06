@@ -1,4 +1,4 @@
-var app = angular.module("index", ['ui.router','ngCookies','angular-loading-bar', 'ngAnimate', 'toastr']);
+var app = angular.module("index", ['ui.router','ngCookies','angular-loading-bar', 'ngAnimate', 'toastr', 'ngCordova']);
 
 app.config(function($stateProvider, $urlRouterProvider){
 	
@@ -36,8 +36,8 @@ app.config(function($stateProvider, $urlRouterProvider){
 		
 	});
 	
-	$urlRouterProvider.otherwise('login');
+	$urlRouterProvider.otherwise('');
 	
 });
 
-app.constant('serverUrl', 'http://192.168.0.22:2121');
+app.constant('serverUrl', 'http://carsecure.herokuapp.com');

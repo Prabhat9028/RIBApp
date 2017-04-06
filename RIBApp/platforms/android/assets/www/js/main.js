@@ -1,27 +1,59 @@
 
-app.controller('ContainerCtrl', ['$scope', '$state', 'Service', function($scope, $state, Service){
-	$state.go('login');
+app.controller('ContainerCtrl', ['$scope', '$state', 'Service', '$cordovaSQLite','$timeout', function($scope, $state, Service, $cordovaSQLite, $timeout){
+	$scope.check = [];
+	document.addEventListener("deviceready", function(){
+		
+		db = $cordovaSQLite.openDB({name:'credentials.db', location:'default'});
+		debugger;
+//		var query = "DROP TABLE cred";
+//		$cordovaSQLite.execute(db, query, []).then(function(resp){
+//			console.log('table droped');
+//		},function(err){
+//			console.log('table not droped');
+//		});
+		
+		var query = "CREATE TABLE IF NOT EXISTS cred (username varchar(50), key varchar(100))";
+		
+		$cordovaSQLite.execute(db, query, []).then(function(resp){
+			console.log('table created');
+		},function(err){
+			console.log('table not created');
+		});
+		
+		var sql = "SELECT * FROM cred";
+		$cordovaSQLite.execute(db, sql, []).then(function(resp){
+			if(resp.rows.length != 0){
+			$scope.check.push({
+			username: resp.rows.item(0).username,
+			key: resp.rows.item(0).key
+			});
+			}
+			var check = $scope.check[0];
+			Service.setCred($scope.check[0]);
+			$timeout(function(){
+				if($scope.check.length == 0){
+				   $state.go('login');
+				}
+			else{
+				debugger;
+			Service.checkCreds(check).then(function(resp){
+				if(resp.data.status == 'success'){
+					$state.go('home')
+				   }
+			});}}, 10);
+			},function(err){
+			console.log(err);
+		});
+		
+	});
+
+	
+		
 }]);
 
-app.controller("loginCtrl", ["$scope", '$state', "Service", "$cookies", "$http", function($scope, $state, Service ,$cookies, $http){
+app.controller("loginCtrl", ["$scope", '$state', "Service", "$cookies", "$http", '$cordovaSQLite', function($scope, $state, Service ,$cookies, $http, $cordovaSQLite){
 	Service.setCarsecure($scope);
 	$scope.cred = {};
-//    $scope.notLoggedIn = false;
-//    if($cookies.get("username") == undefined && $cookies.get("username") != "" && $cookies.get("key") == undefined && $cookies.get("key") != "" )
-//     {
-//         $scope.notLoggedIn = true;
-//     }else{
-//        $http.get("/checkcreds").then(function(resp){
-//            if(resp.data["status"] == "success"){
-//                window.location="home.html";
-//            }else{
-//                $scope.notLoggedIn = true;
-//            }
-//        });
-//     }
-	$scope.signup = function(){
-		$state.go('signup');
-	}
 	$scope.login = function(){
 		var log = angular.copy($scope.carsecure.login);
 		Service.login(log).then(function(resp){
@@ -31,17 +63,29 @@ app.controller("loginCtrl", ["$scope", '$state', "Service", "$cookies", "$http",
 			$scope.cred.key = resp.data.key;
 			$scope.cred.name = resp.data.displayname
 			Service.setCred($scope.cred);
-			console.log($cookies.get("username"));
-			console.log($cookies.get("key"));
-			debugger;
 			if(resp.data.status == "success"){
+				document.addEventListener("deviceready", function(){
+		
+					db = $cordovaSQLite.openDB({name:'credentials.db', location:'default'});
+		
+					var query = "INSERT INTO cred (username, key) values (?,?)";
+					
+					$cordovaSQLite.execute(db, query, [resp.data.username, resp.data.key]).then(function(resp){
+						console.log('value inserted');
+						},function(err){
+							console.log('value not inserted');
+						});			
+					});
 			   $state.go('home');
 			   }
 			else{
 				alert("wrong email or password");
 			}
 		})
-	}	
+	}
+	$scope.signup = function(){
+		$state.go('signup');
+	}
 }]);
 
 
@@ -72,7 +116,6 @@ app.controller("registerVehicle", ["$scope", '$state', "Service", function($scop
 	$scope.carsecure = {};
 	$scope.carsecure.regvehicle = {};
 	$scope.carsecure.regvehicle.email = Service.getEmail();
-	debugger;
 	$scope.regvehicle = function(){
 		var vehicle = angular.copy($scope.carsecure.regvehicle);
 		Service.registervehicle(vehicle).then(function(resp){
@@ -84,7 +127,7 @@ app.controller("registerVehicle", ["$scope", '$state', "Service", function($scop
 }]);
 
 
-app.controller("homeCtrl", ["$scope", '$state', "Service", 'toastr','$timeout', function($scope, $state, Service, toastr, $timeout){
+app.controller("homeCtrl", ["$scope", '$state', "Service", 'toastr','$timeout', '$cordovaSQLite', function($scope, $state, Service, toastr, $timeout, $cordovaSQLite){
 	
 	$scope.credential = {};
 	$scope.credential = Service.getCred();
@@ -110,6 +153,18 @@ app.controller("homeCtrl", ["$scope", '$state', "Service", 'toastr','$timeout', 
 	$scope.logout = function(){
 		debugger;
 		Service.logout(cred).then(function(resp){
+		document.addEventListener("deviceready", function(){
+		
+		db = $cordovaSQLite.openDB({name:'credentials.db', location:'default'});
+
+		var query = "DELETE FROM cred WHERE username = ?";
+
+		$cordovaSQLite.execute(db, query, [cred.username]).then(function(resp){
+			console.log('value deleted');
+			},function(err){
+				console.log('value deleted');
+			});			
+		});	
 		$state.go("login");
 		});
 	}
@@ -183,7 +238,6 @@ app.service("Service",["$http", 'serverUrl', function($http, serverUrl){
     };
 	
 	this.registeruser = function(data){
-		debugger;
         return $http({
             method: 'POST',
             url: serverUrl + "/api/reguser",
@@ -192,7 +246,6 @@ app.service("Service",["$http", 'serverUrl', function($http, serverUrl){
     };
 	
 	this.registervehicle = function(data){
-		debugger;
         return $http({
             method: 'POST',
             url: serverUrl + "/api/regvehicle",
@@ -224,6 +277,12 @@ app.service("Service",["$http", 'serverUrl', function($http, serverUrl){
         });
 	}
 	
-	
+	this.checkCreds = function(cred){
+		return $http({
+            method: "POST",
+            url: serverUrl + "/api/checkcreds",
+			data: cred
+        });	
+	}
 	
 }]);

@@ -10,7 +10,7 @@
 	padding: 0;
 	transition: 0.5s;
 	background-color: white;
-	border-right: 1.5px solid #dddddd;
+	border-right: 2px solid #dddddd;
 }
 #sidebar-slide-in{
 	display: block;
@@ -18,16 +18,21 @@
 #info-sidebar-slideIn{
 	left: 85%;
 }
+
+.button,.button:hover{
+	background-color: transparent;
+	border: none;
+}
 </style>
 <div>
     <div class="container-fluid">
         <div class="row header-row">
             <div class="col-sm-12 col-md-12 col-xs-12">
                 <div class="flex-wrap header-wrap">
-                    <div class=""><button class="btn btn-sm btn-info" style="margin-top:10px" id="info"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
+                    <div class=""><button class="btn btn-lg btn-info button" style="margin-top:10px" id="info"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
                     </div>
                     <div class="">CarSecure</div>
-                    <div class="" ><button class="btn btn-sm btn-danger" style="margin-top:10px" ng-click="logout()">
+                    <div class="" ><button class="btn btn-lg btn-danger button" style="margin-top:10px" ng-click="logout()">
                         <span class="glyphicon glyphicon-log-out" alt="logout"></span>
                         </button>
                     </div>
@@ -36,7 +41,7 @@
         </div>
     </div>
     <div class="" id="info-sidebar">
-			<div style="padding-top: 1em; padding-bottom: 1em; padding-left: 1em;background-color: white;;border-bottom:1px solid grey"
+			<div class="head" style="padding-top: 1em; padding-bottom: 16px; padding-left: 1em;"
 							id="sidebar-slide-in" ng-click="slideIn()">
 							  <span id="info-sidebar-slideIn"
 								  class="glyphicon glyphicon-arrow-left"
@@ -46,13 +51,13 @@
 				
 			</div>
 								<div>
-								<div class="row header" style="margin-left:2px;padding:2px;width:95%;border-bottom:1px solid grey">
+								<div class="row header" style="margin-left:60px;padding:2px;width:95%;">
 									<h4>Profile</h4>
 								</div>
-								<div class="well" style="margin-left:2px;padding:2px;width:95%;">
+								<div class="" style="margin-left:2px;padding:2px;width:95%;margin-top:5px;">
 									<h5>UserName:&nbsp&nbsp{{credential.name}}</h5>
 								</div>
-								<div class="well" style="margin-left:2px;padding:2px;width:95%;">
+								<div class="" style="margin-left:2px;padding:2px;width:95%;">
 									<h5>Email:&nbsp&nbsp{{credential.username}}</h5>
 								</div>
 								</div>
@@ -60,10 +65,10 @@
 								<div class="row header" style="margin-left:2px;padding:2px;width:95%;border-bottom:1px solid grey">
 									<h4>Vehicle Information</h4>
 								</div>
-								<div class="well" style="margin-left:2px;padding:2px;width:95%;">
+								<div class="" style="margin-left:2px;padding:2px;width:95%;">
 									<h5>Car:&nbsp&nbsp {{carName}}</h5>
 								</div>
-								<div class="well" style="margin-left:2px;padding:2px;width:95%;">
+								<div class="" style="margin-left:2px;padding:2px;width:95%;">
 									<h5>Description:&nbsp&nbsp {{carDesp}}</h5>
 								</div>
 								</div>
