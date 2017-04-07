@@ -18,7 +18,7 @@
     "com.phonegap.plugins.PushPlugin": {
         "source": {
             "type": "git",
-            "url": "https://github.com/phonegap-build/PushPlugin.git",
+            "url": "https://github.com/phonegap-build/PushPlugin",
             "subdir": "."
         },
         "is_top_level": true,
@@ -54,6 +54,31 @@
         "source": {
             "type": "registry",
             "id": "cordova-sqlite-storage@2.0.2"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-plugin-firebase": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-firebase@0.1.20"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "Cordova-Plugin-FCMNotification": {
+        "source": {
+            "type": "git",
+            "url": "https://github.com/LokeshPatel/Cordova-Plugin-FCMNotification.git",
+            "subdir": "."
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-plugin-fcm": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-fcm"
         },
         "is_top_level": true,
         "variables": {}
