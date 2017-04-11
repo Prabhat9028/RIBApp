@@ -27,6 +27,9 @@
         },
         "cordova-sqlite-storage": {
             "PACKAGE_NAME": "com.remoteIgnitionBlocking.RIBApp"
+        },
+        "cordova-plugin-fcm": {
+            "PACKAGE_NAME": "com.remoteIgnitionBlocking.RIBApp"
         }
     },
     "dependent_plugins": {}

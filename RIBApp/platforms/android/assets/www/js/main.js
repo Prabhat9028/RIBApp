@@ -12,6 +12,44 @@ app.controller('ContainerCtrl', ['$scope', '$state', 'Service', '$cordovaSQLite'
 //			console.log('table not droped');
 //		});
 		
+		FCMPlugin.onTokenRefresh(function(token){
+//    alert( token );
+		debugger;
+		console.log(token);
+		localStorage.setItem("gcmId", token);
+	});
+
+
+//		
+//		
+		FCMPlugin.getToken(function(token){
+//    alert(token);
+            debugger;
+			console.log(token);
+			localStorage.setItem("gcmId", token);
+	});
+		
+//			setTimeout(getTheToken, 1000);
+//
+//				function getTheToken() {
+//					FCMPlugin.getToken(
+//						function (token) {
+//							if (token == "") {
+//								console.log("null token");
+//								setTimeout(getTheToken, 1000);
+//							} else {
+//								alert(token);
+//								console.log("I got the token: " + token);
+//							}
+//						},
+//						function (err) {
+//							console.log('error retrieving token: ' + err);
+//						}
+//					);
+//				}		
+		
+
+//		
 		var query = "CREATE TABLE IF NOT EXISTS cred (username varchar(50), key varchar(100))";
 		
 		$cordovaSQLite.execute(db, query, []).then(function(resp){
@@ -45,6 +83,47 @@ app.controller('ContainerCtrl', ['$scope', '$state', 'Service', '$cordovaSQLite'
 			console.log(err);
 		});
 		
+//
+//		var pushtoken;
+//
+//				initFCM();
+//				getToken();
+//
+//
+//
+//			function initFCM() {
+//				 FCMPlugin.onTokenRefresh(function(token){
+//					pushtoken = token;
+//					console.log('onTokenRefresh:', +token);
+//				 }, function(err){
+//					console.log('error retrieving token: ' + err);
+//				 });
+//				 FCMPlugin.onNotification(function(data){
+//					if(data.wasTapped){
+//						console.log(JSON.stringify(data));
+//					}else{
+//						console.log(JSON.stringify(data));
+//					}
+//				 }, function(msg){
+//					console.log('onNotification callback successfully registered: ' + msg);
+//				 }, function(err){
+//					console.log('Error registering onNotification callback: ' + err);
+//				 });
+//			}
+//			function getToken() {
+//				 FCMPlugin.getToken(function(token){
+//					 debugger;
+//					pushtoken = token;
+//					console.log('getToken:', +token);
+//					if (token == ""){
+//						console.log("token not receive");
+//					setTimeout(getToken, 2000);
+//					}
+//				 }, function(err){
+//					console.log('error retrieving token: ' + err);
+//				 });
+//			}
+		
 	});
 
 	
@@ -54,6 +133,102 @@ app.controller('ContainerCtrl', ['$scope', '$state', 'Service', '$cordovaSQLite'
 app.controller("loginCtrl", ["$scope", '$state', "Service", "$cookies", "$http", '$cordovaSQLite', function($scope, $state, Service ,$cookies, $http, $cordovaSQLite){
 	Service.setCarsecure($scope);
 	$scope.cred = {};
+	var interval = Service.getInterval();
+	clearInterval(interval);
+	
+	
+	
+	
+	
+//	var pushNotification;
+//	$scope.registerPush = function(){
+//	debugger;
+//          try {
+//            pushNotification = window.plugins.pushNotification;
+//            console.log(pushNotification);
+//            pushNotification.register(successHandler, errorHandler, {"senderID":"501436039618","ecb":"onNotification"});
+//          }
+//          catch(err) {
+//            txt="There was an error on this page.\n\n";
+//            txt+="Error description: " + err.message + "\n\n";
+//            console.log(txt);
+//          }
+//        }
+//
+//       function successHandler (result) {
+//          console.log('result = ' + result);
+//        }
+//        
+//        function errorHandler (error) {
+//          console.log('error = ' + error);
+//        }
+//
+//       function onNotification(e) {
+//		   debugger;
+//          switch( e.event ) {
+//            case 'registered':
+//                  if ( e.regid.length > 0 ){
+//                    // Your GCM push server needs to know the regID before it can push to this device
+//                    // here is where you might want to send it the regID for later use.
+//                    console.log("regID = " + e.regid);
+//                    localStorage.setItem("gcmId", e.regid);
+//                  }
+//                   break;                    
+//            case 'message':
+//                  // if this flag is set, this notification happened while we were in the foreground.
+//                  // you might want to play a sound to get the user's attention, throw up a dialog, etc.
+//                  if (e.foreground) {                      
+//                      console.log("received message in forground");
+//                  }
+//                  else  {
+//                  // otherwise we were launched because the user touched a notification in the notification tray.
+//                      if (e.coldstart)
+//                        console.log('--COLDSTART NOTIFICATION--');
+//                      else
+//                        console.log('--BACKGROUND NOTIFICATION--');
+//                  }
+////                  console.log('MESSAGE -> MSG: ' + e.payload.message);
+////                  console.log('MESSAGE -> MSGCNT: ' + e.payload.msgcnt);
+//                  break;
+//            case 'error':
+//                  console.log('ERROR -> MSG:' + e.msg);
+//                  break;
+//            default:
+//                  console.log('EVENT -> Unknown, an event was received and we do not know what it is');
+//                  break;
+//          }
+//        }
+	
+//	const messaging = firebase.messaging();
+//	
+	$scope.notificationID = function(){
+//	messaging.getToken()
+//	  .then(function(currentToken) {
+//		if (currentToken) {
+//	//      sendTokenToServer(currentToken);
+//	//      updateUIForPushEnabled(currentToken);
+//			console.log(currentToken);
+//		} else {
+//		  // Show permission request.
+//		  console.log('No Instance ID token available. Request permission to generate one.');
+//		  // Show permission UI.
+//		  updateUIForPushPermissionRequired();
+//		  setTokenSentToServer(false);
+//		}
+//	  })
+//	  .catch(function(err) {
+//		console.log('An error occurred while retrieving token. ', err);
+//		showToken('Error retrieving Instance ID token. ', err);
+//		setTokenSentToServer(false);
+//	  });
+		
+		
+		
+		
+	}
+	
+	
+	
 	$scope.login = function(){
 		var log = angular.copy($scope.carsecure.login);
 		Service.login(log).then(function(resp){
@@ -64,6 +239,9 @@ app.controller("loginCtrl", ["$scope", '$state', "Service", "$cookies", "$http",
 			$scope.cred.name = resp.data.displayname
 			Service.setCred($scope.cred);
 			if(resp.data.status == "success"){
+//				$scope.registerPush();
+				 $scope.notificationID();
+				
 				document.addEventListener("deviceready", function(){
 		
 					db = $cordovaSQLite.openDB({name:'credentials.db', location:'default'});
@@ -133,6 +311,19 @@ app.controller("homeCtrl", ["$scope", '$state', "Service", 'toastr','$timeout', 
 	$scope.credential = Service.getCred();
 	var cred = $scope.credential;
 	console.log(cred);
+	
+//	var gcmId = localStorage.getItem("gcmId");
+//      console.log(gcmId);
+//      if (vm.userInfo.notificationId != gcmId ) {
+//        console.log("User changed device");
+//        vm.userInfo.notificationId = gcmId;
+//        vm.userInfo.notificationType = "gcm";
+//        console.log("Sending notificationType and notificationId");
+//        PaymentInfoService.registerNotificationId(vm.userInfo.notificationId, vm.userInfo.notificationType);
+//      }
+	  
+	
+	
 	Service.getvehicle(cred).then(function(resp){
 		console.log(resp.data);
 		$scope.carName = resp.data.name;
@@ -144,6 +335,13 @@ app.controller("homeCtrl", ["$scope", '$state', "Service", 'toastr','$timeout', 
 		console.log(resp.data);
 		$scope.notificationData = resp.data.data;
 	});
+	
+	var setInter = setInterval(function(){Service.getNotifications(cred).then(function(resp){
+		console.log(resp.data);
+		$scope.notificationData = resp.data.data;
+	});},5000);
+	
+	Service.setInterval(setInter);
 	
 	$scope.slideIn = function() {
         document.getElementById('info-sidebar').style.width = '0vw';
@@ -193,6 +391,15 @@ app.service("Service",["$http", 'serverUrl', function($http, serverUrl){
 	this.carsecure  = "";
 	this.respEmail = "";
 	this.cred = "";
+	this.setInter = '';
+	
+	this.setInterval = function(interval){
+		this.setInter = interval;
+	}
+	
+	this.getInterval = function(){
+		return this.setInter;
+	}
 	
 	this.setCred = function(credential){
 		this.cred = credential;
@@ -265,7 +472,8 @@ app.service("Service",["$http", 'serverUrl', function($http, serverUrl){
 		 return $http({
             method: "POST",
             url: serverUrl + "/api/getallnotifications",
-			data: credential
+			data: credential,
+			ignoreLoadingBar: true
         });
 	}
 	
@@ -284,5 +492,8 @@ app.service("Service",["$http", 'serverUrl', function($http, serverUrl){
 			data: cred
         });	
 	}
+	
+	this
+	
 	
 }]);

@@ -1,3 +1,4 @@
+<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
 <style>
 #info-sidebar{
 	position: absolute;
@@ -41,38 +42,39 @@
         </div>
     </div>
     <div class="" id="info-sidebar">
-			<div class="head" style="padding-top: 1em; padding-bottom: 16px; padding-left: 1em;"
-							id="sidebar-slide-in" ng-click="slideIn()">
-							  <span id="info-sidebar-slideIn"
-								  class="glyphicon glyphicon-arrow-left"
-								  style="font-size: 20px; position: relative;"></span>
-			</div>
-			<div>
-				
-			</div>
-								<div>
-								<div class="row header" style="margin-left:60px;padding:2px;width:95%;">
-									<h4>Profile</h4>
-								</div>
-								<div class="" style="margin-left:2px;padding:2px;width:95%;margin-top:5px;">
-									<h5>UserName:&nbsp&nbsp{{credential.name}}</h5>
-								</div>
-								<div class="" style="margin-left:2px;padding:2px;width:95%;">
-									<h5>Email:&nbsp&nbsp{{credential.username}}</h5>
-								</div>
-								</div>
-								<div>
-								<div class="row header" style="margin-left:2px;padding:2px;width:95%;border-bottom:1px solid grey">
-									<h4>Vehicle Information</h4>
-								</div>
-								<div class="" style="margin-left:2px;padding:2px;width:95%;">
-									<h5>Car:&nbsp&nbsp {{carName}}</h5>
-								</div>
-								<div class="" style="margin-left:2px;padding:2px;width:95%;">
-									<h5>Description:&nbsp&nbsp {{carDesp}}</h5>
-								</div>
-								</div>
-								
+        <div class="head" style="padding-top: 1em; padding-bottom: 16px; padding-left: 1em;" id="sidebar-slide-in" ng-click="slideIn()">
+            <span id="info-sidebar-slideIn" class="glyphicon glyphicon-arrow-left" style="font-size: 20px; position: relative;"></span>
+        </div>
+        <div>
+            <div class="" style="font-family: 'Lobster', cursive; text-align: center; border-bottom: 1px dotted dimgrey;">
+                <h3>Profile</h3>
+            </div>
+            <table>
+                <tr>
+                    <td><h5 style="font-size:16px; font-weight: 700;">UserName</h5></td>
+                    <td>{{credential.name}}</td>
+                </tr>
+                <tr>
+                    <td><h5 style="font-size:16px; font-weight: 700;">Email</h5></td>
+                    <td>{{credential.username}}</td>
+                </tr>
+            </table>
+        </div>
+        <div>
+            <div class="" style="font-family: 'Lobster', cursive; text-align: center; border-bottom: 1px dotted dimgrey;">
+                <h3>Vehicle Information</h3>
+            </div>
+            <table>
+                <tr>
+                    <td><h5 style="font-size:16px; font-weight: 700;">Car</h5></td>
+                    <td>{{carName}}</td>
+                </tr>
+                <tr>
+                    <td><h5 style="font-size:16px; font-weight: 700;">Description</h5></td>
+                    <td>{{carDesp}}</td>
+                </tr>
+            </table>
+        </div>
 	</div>
     <div class="container">
         <div class="row" >

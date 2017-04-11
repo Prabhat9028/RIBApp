@@ -1,27 +1,27 @@
 {
   "project_info": {
-    "project_number": "501436039618",
-    "firebase_url": "https://ribapp-4c481.firebaseio.com",
-    "project_id": "ribapp-4c481",
-    "storage_bucket": "ribapp-4c481.appspot.com"
+    "project_number": "299313470248",
+    "firebase_url": "https://remoteignitionblocking.firebaseio.com",
+    "project_id": "remoteignitionblocking",
+    "storage_bucket": "remoteignitionblocking.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:501436039618:android:e45d4602ac169cd0",
+        "mobilesdk_app_id": "1:299313470248:android:e45d4602ac169cd0",
         "android_client_info": {
           "package_name": "com.remoteIgnitionBlocking.RIBApp"
         }
       },
       "oauth_client": [
         {
-          "client_id": "501436039618-0hnnkm5dt5tr1d5slmoat2k9p7urmbk7.apps.googleusercontent.com",
+          "client_id": "299313470248-da88o5kef0ppjdghp9n6epmha8eq33e5.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDFAb0B0584GObq2F3JKuYfGiBwn_LQkt4"
+          "current_key": "AIzaSyCG4Qhr1zdumLAfXx3r7Lh7r-p4brEO3NI"
         }
       ],
       "services": {

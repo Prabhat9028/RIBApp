@@ -70,6 +70,14 @@ module.exports = [
         "clobbers": [
             "SQLitePlugin"
         ]
+    },
+    {
+        "id": "cordova-plugin-fcm.FCMPlugin",
+        "file": "plugins/cordova-plugin-fcm/www/FCMPlugin.js",
+        "pluginId": "cordova-plugin-fcm",
+        "clobbers": [
+            "FCMPlugin"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -81,7 +89,8 @@ module.exports.metadata =
     "cordova-plugin-nativestorage": "2.2.2",
     "cordova-plugin-x-toast": "2.6.0",
     "org.pbernasconi.progressindicator": "1.1.0",
-    "cordova-sqlite-storage": "2.0.2"
+    "cordova-sqlite-storage": "2.0.2",
+    "cordova-plugin-fcm": "2.1.1"
 };
 // BOTTOM OF METADATA
 });

@@ -35,6 +35,10 @@
                         {
                             "xml": "<feature name=\"SQLitePlugin\"><param name=\"android-package\" value=\"io.sqlc.SQLitePlugin\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"FCMPlugin\"><param name=\"android-package\" value=\"com.gae.scaffolder.plugin.FCMPlugin\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -83,6 +87,18 @@
                         {
                             "xml": "<service android:name=\"com.plugin.gcm.GCMIntentService\" />",
                             "count": 1
+                        },
+                        {
+                            "xml": "<activity android:exported=\"true\" android:launchMode=\"singleTop\" android:name=\"com.gae.scaffolder.plugin.FCMPluginActivity\"><intent-filter><action android:name=\"FCM_PLUGIN_ACTIVITY\" /><category android:name=\"android.intent.category.DEFAULT\" /></intent-filter></activity>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<service android:name=\"com.gae.scaffolder.plugin.MyFirebaseMessagingService\"><intent-filter><action android:name=\"com.google.firebase.MESSAGING_EVENT\" /></intent-filter></service>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<service android:name=\"com.gae.scaffolder.plugin.MyFirebaseInstanceIDService\"><intent-filter><action android:name=\"com.google.firebase.INSTANCE_ID_EVENT\" /></intent-filter></service>",
+                            "count": 1
                         }
                     ]
                 }
@@ -109,6 +125,9 @@
             "PACKAGE_NAME": "com.remoteIgnitionBlocking.RIBApp"
         },
         "cordova-sqlite-storage": {
+            "PACKAGE_NAME": "com.remoteIgnitionBlocking.RIBApp"
+        },
+        "cordova-plugin-fcm": {
             "PACKAGE_NAME": "com.remoteIgnitionBlocking.RIBApp"
         }
     },
@@ -184,6 +203,14 @@
             "clobbers": [
                 "SQLitePlugin"
             ]
+        },
+        {
+            "id": "cordova-plugin-fcm.FCMPlugin",
+            "file": "plugins/cordova-plugin-fcm/www/FCMPlugin.js",
+            "pluginId": "cordova-plugin-fcm",
+            "clobbers": [
+                "FCMPlugin"
+            ]
         }
     ],
     "plugin_metadata": {
@@ -193,6 +220,7 @@
         "cordova-plugin-nativestorage": "2.2.2",
         "cordova-plugin-x-toast": "2.6.0",
         "org.pbernasconi.progressindicator": "1.1.0",
-        "cordova-sqlite-storage": "2.0.2"
+        "cordova-sqlite-storage": "2.0.2",
+        "cordova-plugin-fcm": "2.1.1"
     }
 }
