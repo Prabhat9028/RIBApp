@@ -10,11 +10,11 @@
     color: #cccccc;
 }
 
-body{background-color: #ffffff;}
+body{background-color: #fff;}
 
 .header-row{
     /*background-color: #eeeeee;*/
-	background-color: #0b5b73;
+	background-color: steelblue;
     border-bottom: 2px solid #dddddd;
     color: white;
 }
@@ -91,7 +91,7 @@ body{background-color: #ffffff;}
 }
 
 .card-header{
-    background-color: #cedadd;
+    background-color: #eee;
     font-size: 12px;
 }
 
@@ -130,4 +130,11 @@ body{background-color: #ffffff;}
 .scrollable-data::-webkit-scrollbar-thumb{
     border-radius: 1em;
     background-color: #eee;
+}
+
+.sideBarCreators{
+    margin-top: 21em;
+    /*border: 1px solid red;*/
+    text-align: center;
+    color: #cccccc;
 }

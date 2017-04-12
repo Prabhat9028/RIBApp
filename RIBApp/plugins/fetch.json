@@ -66,15 +66,6 @@
         "is_top_level": true,
         "variables": {}
     },
-    "Cordova-Plugin-FCMNotification": {
-        "source": {
-            "type": "git",
-            "url": "https://github.com/LokeshPatel/Cordova-Plugin-FCMNotification.git",
-            "subdir": "."
-        },
-        "is_top_level": true,
-        "variables": {}
-    },
     "cordova-plugin-fcm": {
         "source": {
             "type": "registry",

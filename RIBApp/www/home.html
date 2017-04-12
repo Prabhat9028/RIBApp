@@ -1,10 +1,10 @@
 <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
 <style>
 #info-sidebar{
-	position: absolute;
+	position: fixed;
 	left: -80vw;
 	top:0;
-	height: 110vh;
+	height: 100vh;
 	width: 0vw;
 	z-index: 1000000;
 	margin: 0;
@@ -51,11 +51,11 @@
             </div>
             <table>
                 <tr>
-                    <td><h5 style="font-size:16px; font-weight: 700;">UserName</h5></td>
+                    <td><h5 style="font-size:15px; font-weight: 600;">UserName&nbsp;</h5></td>
                     <td>{{credential.name}}</td>
                 </tr>
                 <tr>
-                    <td><h5 style="font-size:16px; font-weight: 700;">Email</h5></td>
+                    <td><h5 style="font-size:15px; font-weight: 600;">Email</h5></td>
                     <td>{{credential.username}}</td>
                 </tr>
             </table>
@@ -66,14 +66,17 @@
             </div>
             <table>
                 <tr>
-                    <td><h5 style="font-size:16px; font-weight: 700;">Car</h5></td>
+                    <td><h5 style="font-size:15px; font-weight: 600;">Car</h5></td>
                     <td>{{carName}}</td>
                 </tr>
                 <tr>
-                    <td><h5 style="font-size:16px; font-weight: 700;">Description</h5></td>
+                    <td><h5 style="font-size:15px; font-weight: 600;">Description&nbsp;</h5></td>
                     <td>{{carDesp}}</td>
                 </tr>
             </table>
+        </div>
+        <div class="sideBarCreators">
+            Created by Prajyot Walali, Prabhat Singh and Ranvijay Prajapati.
         </div>
 	</div>
     <div class="container">

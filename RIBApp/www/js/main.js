@@ -4,30 +4,17 @@ app.controller('ContainerCtrl', ['$scope', '$state', 'Service', '$cordovaSQLite'
 	document.addEventListener("deviceready", function(){
 		
 		db = $cordovaSQLite.openDB({name:'credentials.db', location:'default'});
-		debugger;
-//		var query = "DROP TABLE cred";
-//		$cordovaSQLite.execute(db, query, []).then(function(resp){
-//			console.log('table droped');
-//		},function(err){
-//			console.log('table not droped');
-//		});
-		
+
 		FCMPlugin.onTokenRefresh(function(token){
-//    alert( token );
-		debugger;
-		console.log(token);
-		localStorage.setItem("gcmId", token);
-	});
+		  console.log(token);
+		  localStorage.setItem("gcmId", token);
+	    });
 
 
-//		
-//		
 		FCMPlugin.getToken(function(token){
-//    alert(token);
-            debugger;
-			console.log(token);
-			localStorage.setItem("gcmId", token);
-	});
+          console.log(token);
+          localStorage.setItem("fcmID", token);
+        });
 
 		var query = "CREATE TABLE IF NOT EXISTS cred (username varchar(50), key varchar(100))";
 		
@@ -52,12 +39,20 @@ app.controller('ContainerCtrl', ['$scope', '$state', 'Service', '$cordovaSQLite'
 				   $state.go('login');
 				}
 			else{
-				debugger;
 			Service.checkCreds(check).then(function(resp){
 				if(resp.data.status == 'success'){
 					$state.go('home')
 				   }
-			});}}, 10);
+				   else{
+                     var query = "DROP TABLE cred";
+                    $cordovaSQLite.execute(db, query, []).then(function(resp){
+                        console.log('table droped');
+                    },function(err){
+                        console.log('table not droped');
+                    });
+                    $state.go('login');
+				   }
+			});}}, 5);
 			},function(err){
 			console.log(err);
 		});
@@ -126,7 +121,7 @@ app.controller("loginCtrl", ["$scope", '$state', "Service", "$cookies", "$http",
 			Service.setCred($scope.cred);
 			if(resp.data.status == "success"){
 //				$scope.registerPush();
-				 $scope.notificationID();
+//				 $scope.notificationID();
 				
 				document.addEventListener("deviceready", function(){
 		
@@ -147,6 +142,11 @@ app.controller("loginCtrl", ["$scope", '$state', "Service", "$cookies", "$http",
 			}
 		})
 	}
+
+	document.addEventListener("backbutton",function(){
+            navigator.app.exitApp();
+	})
+
 	$scope.signup = function(){
 		$state.go('signup');
 	}
@@ -166,7 +166,6 @@ app.controller("registerUser",["$scope", '$state', "Service", function($scope, $
 		Service.registeruser(user).then(function(resp){
 			var email = resp.data.email;
 			Service.setEmail(email);
-			debugger;
 			$state.go('registervehicle');
 		});
 	};
@@ -197,6 +196,8 @@ app.controller("homeCtrl", ["$scope", '$state', "Service", 'toastr','$timeout', 
 	$scope.credential = Service.getCred();
 	var cred = $scope.credential;
 	console.log(cred);
+	var ID = localStorage.getItem("fcmID");
+	console.log(ID);
 
 	Service.getvehicle(cred).then(function(resp){
 		console.log(resp.data);
@@ -213,7 +214,7 @@ app.controller("homeCtrl", ["$scope", '$state', "Service", 'toastr','$timeout', 
 	var setInter = setInterval(function(){Service.getNotifications(cred).then(function(resp){
 		console.log(resp.data);
 		$scope.notificationData = resp.data.data;
-	});},5000);
+	});},2000);
 	
 	Service.setInterval(setInter);
 	
