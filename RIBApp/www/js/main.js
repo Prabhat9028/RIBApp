@@ -2,17 +2,14 @@
 app.controller('ContainerCtrl', ['$scope', '$state', 'Service', '$cordovaSQLite','$timeout', function($scope, $state, Service, $cordovaSQLite, $timeout){
 	$scope.check = [];
 	document.addEventListener("deviceready", function(){
-		console.log(device.uuid);
 		db = $cordovaSQLite.openDB({name:'credentials.db', location:'default'});
 
 		FCMPlugin.onTokenRefresh(function(token){
-		  console.log(token);
 		  localStorage.setItem("fcmID", token);
 	    });
 
 
 		FCMPlugin.getToken(function(token){
-          console.log(token);
           localStorage.setItem("fcmID", token);
         });
 
@@ -78,15 +75,12 @@ app.controller("loginCtrl", ["$scope", '$state', "Service", "$cookies", "$http",
 	var interval = Service.getInterval();
 	clearInterval(interval);
 	var ID = localStorage.getItem("fcmID");
-   	console.log(ID);
    	$scope.carsecure.login.tokenID = ID;
 
 
 	$scope.login = function(){
 		var log = angular.copy($scope.carsecure.login);
 		Service.login(log).then(function(resp){
-			console.log(resp.status);
-			console.log(resp.data);
 			$scope.cred.username = resp.data.username;
 			$scope.cred.key = resp.data.key;
 			$scope.cred.name = resp.data.displayname;
@@ -132,7 +126,6 @@ app.controller("registerUser",["$scope", '$state', "Service", function($scope, $
 	$scope.carsecure.regvehicle = {};
 	$scope.reguser = function(){
 		var user = angular.copy($scope.carsecure.user);
-		console.log($scope.carsecure);
 		if($scope.carsecure.user.password1 == $scope.carsecure.user.password2){
 		Service.registeruser(user).then(function(resp){
 			var email = resp.data.email;
@@ -157,8 +150,6 @@ app.controller("registerVehicle", ["$scope", '$state', "Service", function($scop
 	$scope.regvehicle = function(){
 		var vehicle = angular.copy($scope.carsecure.regvehicle);
 		Service.registervehicle(vehicle).then(function(resp){
-		console.log(resp.status);
-		console.log($scope.carsecure.regvehicle);
 			$state.go('login');
 		});
 	};
@@ -170,22 +161,18 @@ app.controller("homeCtrl", ["$scope", '$state', "Service", 'toastr','$timeout', 
 	$scope.credential = {};
 	$scope.credential = Service.getCred();
 	var cred = $scope.credential;
-	console.log(cred);
 
 	Service.getNotifications(cred).then(function(resp){
-		console.log(resp.data);
 		$scope.notificationData = resp.data.data;
 	});
 
 	Service.getvehicle(cred).then(function(resp){
-    		console.log(resp.data);
     		$scope.carName = resp.data.name;
     		$scope.carDesp = resp.data.description;
 
     	});
 	
 	var setInter = setInterval(function(){Service.getNotifications(cred).then(function(resp){
-		console.log(resp.data);
 		$scope.notificationData = resp.data.data;
 	});},2000);
 	
@@ -197,7 +184,7 @@ app.controller("homeCtrl", ["$scope", '$state', "Service", 'toastr','$timeout', 
     }
 	
 	$scope.logout = function(){
-		debugger;
+		
 		Service.logout(cred).then(function(resp){
 		document.addEventListener("deviceready", function(){
 		
@@ -219,9 +206,8 @@ app.controller("homeCtrl", ["$scope", '$state', "Service", 'toastr','$timeout', 
 		$scope.credential.useraction = option;
 		$scope.credential.notificationId = id;
 		var data = $scope.credential;
-		debugger;
+		
 		Service.userAction(data).then(function(resp){
-			console.log(resp.data);
 			if(resp.data.status == 'success'){
 			   $timeout(function(){
 				   Service.getNotifications(cred).then(function(resp){
@@ -262,12 +248,12 @@ app.service("Service",["$http", 'serverUrl', function($http, serverUrl){
 	
 	this.setEmail = function(email){
 		this.respEmail = email;	
-		debugger;
+		
 	}
 	
 	this.getEmail = function(){
 		return this.respEmail;
-		debugger;
+		
 	}
 	
 	this.setCarsecure = function(scope){
