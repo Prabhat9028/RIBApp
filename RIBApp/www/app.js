@@ -40,4 +40,4 @@ app.config(function($stateProvider, $urlRouterProvider){
 	
 });
 
-app.constant('serverUrl', 'http://carsecure.herokuapp.com');
+app.constant('serverUrl', 'https://carsecure.herokuapp.com');

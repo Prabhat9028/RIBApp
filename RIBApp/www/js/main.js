@@ -2,12 +2,12 @@
 app.controller('ContainerCtrl', ['$scope', '$state', 'Service', '$cordovaSQLite','$timeout', function($scope, $state, Service, $cordovaSQLite, $timeout){
 	$scope.check = [];
 	document.addEventListener("deviceready", function(){
-		
+		console.log(device.uuid);
 		db = $cordovaSQLite.openDB({name:'credentials.db', location:'default'});
 
 		FCMPlugin.onTokenRefresh(function(token){
 		  console.log(token);
-		  localStorage.setItem("gcmId", token);
+		  localStorage.setItem("fcmID", token);
 	    });
 
 
@@ -16,8 +16,16 @@ app.controller('ContainerCtrl', ['$scope', '$state', 'Service', '$cordovaSQLite'
           localStorage.setItem("fcmID", token);
         });
 
+         FCMPlugin.onNotification(function(data){
+            if(data.wasTapped){
+              //Notification was received on device tray and tapped by the user.
+              console.log( JSON.stringify(data) );
+            }else{
+              //Notification was received in foreground. Maybe the user needs to be notified.
+              console.log( JSON.stringify(data) );
+            }
+        });
 		var query = "CREATE TABLE IF NOT EXISTS cred (username varchar(50), key varchar(100))";
-		
 		$cordovaSQLite.execute(db, query, []).then(function(resp){
 			console.log('table created');
 		},function(err){
@@ -56,48 +64,6 @@ app.controller('ContainerCtrl', ['$scope', '$state', 'Service', '$cordovaSQLite'
 			},function(err){
 			console.log(err);
 		});
-		
-//
-//		var pushtoken;
-//
-//				initFCM();
-//				getToken();
-//
-//
-//
-//			function initFCM() {
-//				 FCMPlugin.onTokenRefresh(function(token){
-//					pushtoken = token;
-//					console.log('onTokenRefresh:', +token);
-//				 }, function(err){
-//					console.log('error retrieving token: ' + err);
-//				 });
-//				 FCMPlugin.onNotification(function(data){
-//					if(data.wasTapped){
-//						console.log(JSON.stringify(data));
-//					}else{
-//						console.log(JSON.stringify(data));
-//					}
-//				 }, function(msg){
-//					console.log('onNotification callback successfully registered: ' + msg);
-//				 }, function(err){
-//					console.log('Error registering onNotification callback: ' + err);
-//				 });
-//			}
-//			function getToken() {
-//				 FCMPlugin.getToken(function(token){
-//					 debugger;
-//					pushtoken = token;
-//					console.log('getToken:', +token);
-//					if (token == ""){
-//						console.log("token not receive");
-//					setTimeout(getToken, 2000);
-//					}
-//				 }, function(err){
-//					console.log('error retrieving token: ' + err);
-//				 });
-//			}
-		
 	});
 
 	
@@ -107,8 +73,14 @@ app.controller('ContainerCtrl', ['$scope', '$state', 'Service', '$cordovaSQLite'
 app.controller("loginCtrl", ["$scope", '$state', "Service", "$cookies", "$http", '$cordovaSQLite', function($scope, $state, Service ,$cookies, $http, $cordovaSQLite){
 	Service.setCarsecure($scope);
 	$scope.cred = {};
+	$scope.carsecure = {};
+	$scope.carsecure.login = {};
 	var interval = Service.getInterval();
 	clearInterval(interval);
+	var ID = localStorage.getItem("fcmID");
+   	console.log(ID);
+   	$scope.carsecure.login.tokenID = ID;
+
 
 	$scope.login = function(){
 		var log = angular.copy($scope.carsecure.login);
@@ -117,11 +89,9 @@ app.controller("loginCtrl", ["$scope", '$state', "Service", "$cookies", "$http",
 			console.log(resp.data);
 			$scope.cred.username = resp.data.username;
 			$scope.cred.key = resp.data.key;
-			$scope.cred.name = resp.data.displayname
+			$scope.cred.name = resp.data.displayname;
 			Service.setCred($scope.cred);
 			if(resp.data.status == "success"){
-//				$scope.registerPush();
-//				 $scope.notificationID();
 				
 				document.addEventListener("deviceready", function(){
 		
@@ -163,11 +133,16 @@ app.controller("registerUser",["$scope", '$state', "Service", function($scope, $
 	$scope.reguser = function(){
 		var user = angular.copy($scope.carsecure.user);
 		console.log($scope.carsecure);
+		if($scope.carsecure.user.password1 == $scope.carsecure.user.password2){
 		Service.registeruser(user).then(function(resp){
 			var email = resp.data.email;
 			Service.setEmail(email);
 			$state.go('registervehicle');
 		});
+		}
+		else{
+		    alert("Password not match");
+		}
 	};
 	$scope.login = function(){
 		$state.go('login');
@@ -196,20 +171,18 @@ app.controller("homeCtrl", ["$scope", '$state', "Service", 'toastr','$timeout', 
 	$scope.credential = Service.getCred();
 	var cred = $scope.credential;
 	console.log(cred);
-	var ID = localStorage.getItem("fcmID");
-	console.log(ID);
 
-	Service.getvehicle(cred).then(function(resp){
-		console.log(resp.data);
-		$scope.carName = resp.data.name;
-		$scope.carDesp = resp.data.description;
-		
-	});
-	
 	Service.getNotifications(cred).then(function(resp){
 		console.log(resp.data);
 		$scope.notificationData = resp.data.data;
 	});
+
+	Service.getvehicle(cred).then(function(resp){
+    		console.log(resp.data);
+    		$scope.carName = resp.data.name;
+    		$scope.carDesp = resp.data.description;
+
+    	});
 	
 	var setInter = setInterval(function(){Service.getNotifications(cred).then(function(resp){
 		console.log(resp.data);
@@ -258,8 +231,10 @@ app.controller("homeCtrl", ["$scope", '$state', "Service", 'toastr','$timeout', 
 			   }
 		})
 	}
-	
-	
+
+	document.addEventListener("backbutton",function(){
+                navigator.app.exitApp();
+    	})
 }]);
 
 app.service("Service",["$http", 'serverUrl', function($http, serverUrl){

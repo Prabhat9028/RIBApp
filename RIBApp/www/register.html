@@ -1,4 +1,12 @@
-<div class="container-fluid">
+<style>
+	@media (max-height: 500px){
+		.creatorpanel{
+			display: none;
+		}
+		
+	}
+</style>
+   <div class="container-fluid">
     <div class="row" style="margin-top:60px">
             <h1 class="logo">CarSecure</h1>
                 </div>
@@ -21,14 +29,13 @@
                 </form>
             </div>
     </div>
-        <div class="panel">
+        <div class="creatorpanel panel">
         <div class="col-md-12 col-xs-12 col-sm-12 redirect">
             <span>Already have an account?&nbsp;&nbsp;&nbsp;Login&nbsp;&nbsp;&nbsp;<a ng-click="login()">here</a> </span>
-        </div>
         </div>
         <div class="col-md-12 col-xs-12 col-sm-12 creators">
             Created by Prajyot Walali, Prabhat Singh and Ranvijay Prajapati.
         </div>
-
+        </div>
 
 </div>
